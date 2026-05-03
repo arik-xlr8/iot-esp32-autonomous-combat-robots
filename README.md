@@ -283,3 +283,4 @@ This keeps the device synchronized with the dashboard and allows real-time contr
 - Piezo sensors are sensitive to cable movement and mechanical vibration, so their wires must be fixed to the cardboard body to reduce false hit detection.
 - The ADXL345 accelerometer was added experimentally, but the main working sensors for the final battle logic are the piezo sensors and the LDR module.
 - The robot bodies are made from cardboard, so mechanical stability affects hit detection and servo performance.
+- The robot heads will be attached on the presentation day. This is because after gluing the heads permanently, fixing or disassembling the internal components in case of a possible problem would become almost impossible.
