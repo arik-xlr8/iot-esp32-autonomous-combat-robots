@@ -1,3 +1,5 @@
+# ChadGPT vs GROKOZILLA: IoT Robot Battle Arena
+
 ## 1. Project Summary
 
 ChadGPT vs GROKOZILLA is an IoT-based robot battle project built with ESP32.  
@@ -6,8 +8,9 @@ Each robot has a piezo sensor to detect physical hits and reduce health points d
 An OLED screen displays live health values, rage mode status, light-based speed boosts, and the winner.  
 An LDR sensor changes the battle dynamics by giving speed advantage depending on ambient light.  
 The project is designed to demonstrate sensor integration, actuator control, real-time feedback, and IoT dashboard monitoring.  
-Arduino IoT Cloud will be used to start/stop the battle and monitor robot data remotely.  
+Arduino IoT Cloud is used to start/stop the battle and monitor robot data remotely.
 
+---
 
 ## 2. Components List
 
@@ -20,7 +23,9 @@ Arduino IoT Cloud will be used to start/stop the battle and monitor robot data r
 | Actuator | SG90 Micro Servo x2 | Moves robot arms for attacking |
 | Extra | LED | Debug indicator for hit detection |
 | Structure | Cardboard / Mukavva | Robot body and arena structure |
+| Experimental | ADXL345 Accelerometer | Experimental acceleration measurement |
 
+---
 
 ## 3. Wiring Table
 
@@ -54,7 +59,6 @@ Arduino IoT Cloud will be used to start/stop the battle and monitor robot data r
 | ADXL345 *(experimental)* | CS | 3V3 | Enables I2C mode |
 | ADXL345 *(experimental)* | SDO | GND | Sets I2C address to 0x53 |
 
-
 ### Power Distribution Note
 
 The two SG90 servo motors are powered from separate 5V sources instead of powering both from the ESP32.  
@@ -62,6 +66,7 @@ Servo Motor 1 is powered from the Arduino Uno 5V pin, while Servo Motor 2 is pow
 This setup was chosen because powering both servos from a single weak 5V source caused unstable movement, slower response, and jitter.  
 All grounds are connected together as a common ground so that the ESP32 control signals can be correctly interpreted by the servos.
 
+---
 
 ## 4. Wiring Diagram
 
@@ -94,9 +99,11 @@ All grounds are connected together as a common ground so that the ESP32 control 
  Piezo Pull-down:
  GPIO34 ── 1MΩ ── GND
  GPIO35 ── 1MΩ ── GND
+```
 
+---
 
- ## 5. Cloud Setup
+## 5. Cloud Setup
 
 The project uses **Arduino IoT Cloud** as the cloud platform.  
 The ESP32 is connected to Arduino IoT Cloud over Wi-Fi and controlled through a web dashboard.
@@ -139,6 +146,7 @@ The ESP32 is connected to Arduino IoT Cloud over Wi-Fi and controlled through a 
 | Text Widget | `lightModeCloud` | Shows which robot receives the light-based speed boost |
 | Text Widget | `winnerCloud` | Shows the battle winner |
 
+---
 
 ## 6. How to Run
 
@@ -174,12 +182,29 @@ The ESP32 connects to Wi-Fi using the credentials defined in `thingProperties.h`
 Example:
 
 ```cpp
-const char SSID[] = "";
-const char PASS[] = "";
-const char DEVICE_KEY[] = "";
+const char SSID[] = "YOUR_WIFI_NAME";
+const char PASS[] = "YOUR_WIFI_PASSWORD";
+const char DEVICE_KEY[] = "YOUR_DEVICE_SECRET_KEY";
+```
 
+For security, real Wi-Fi passwords and Arduino Cloud Device Secret Keys should not be committed to GitHub.  
+In the public repository, these values should be replaced with placeholders.
 
-```md
+### Upload Steps
+
+1. Create a Thing in Arduino IoT Cloud.
+2. Add the required cloud variables.
+3. Open the generated sketch.
+4. Paste the main ESP32 code into the `.ino` file.
+5. Keep or update the generated `thingProperties.h` file.
+6. Select the board as **DOIT ESP32 DEVKIT V1**.
+7. Select the correct serial port.
+8. Upload the sketch to the ESP32.
+9. Open the Arduino IoT Cloud Dashboard.
+10. Turn on the `gameRunning` switch to start the battle.
+
+---
+
 ## 7. How It Works
 
 The system is controlled by an ESP32 microcontroller.  
@@ -218,8 +243,9 @@ The Arduino IoT Cloud Dashboard also controls the battle:
 The ESP32 continuously calls `ArduinoCloud.update()` inside the main loop.  
 This keeps the device synchronized with the dashboard and allows real-time control from the cloud.
 
+---
 
-## Evidence
+## 8. Evidence
 
 ### Project Screenshots
 
@@ -247,6 +273,7 @@ This keeps the device synchronized with the dashboard and allows real-time contr
 
 [Watch the demo video](Gonna Update)
 
+---
 
 ## 9. Notes and Limitations
 
