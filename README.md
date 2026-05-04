@@ -269,6 +269,8 @@ This keeps the device synchronized with the dashboard and allows real-time contr
 
 ![Screenshot 10](images/10.jpg)
 
+![Screenshot 11](images/11.PNG)
+
 ### Demo Video
 
 [Watch the demo video](https://youtu.be/GvRGWFS9E6M)
