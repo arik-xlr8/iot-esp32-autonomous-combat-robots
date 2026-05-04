@@ -271,7 +271,7 @@ This keeps the device synchronized with the dashboard and allows real-time contr
 
 ### Demo Video
 
-[Watch the demo video](https://youtube.com/shorts/k6hjZ_66bD4?feature=share)
+[Watch the demo video](https://youtu.be/GvRGWFS9E6M)
 
 ---
 
