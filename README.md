@@ -7,6 +7,7 @@ The system includes two cardboard robots that attack each other using servo-driv
 Each robot has a piezo sensor to detect physical hits and reduce health points during the battle.  
 An OLED screen displays live health values, rage mode status, light-based speed boosts, and the winner.  
 An LDR sensor changes the battle dynamics by giving speed advantage depending on ambient light.  
+An ADXL345 accelerometer is also included experimentally to read X/Y/Z acceleration and observe arena shake data on the OLED/Serial output.  
 The project is designed to demonstrate sensor integration, actuator control, real-time feedback, and IoT dashboard monitoring.  
 Arduino IoT Cloud is used to start/stop the battle and monitor robot data remotely.
 
@@ -163,6 +164,8 @@ Install the following libraries in Arduino IDE or Arduino Cloud Editor:
 | `ArduinoIoTCloud` | Connects ESP32 to Arduino IoT Cloud |
 | `Arduino_ConnectionHandler` | Handles Wi-Fi connection for Arduino IoT Cloud |
 
+The ADXL345 accelerometer uses the built-in `Wire` library over a separate I2C bus, so no extra ADXL345 library is required in the current code.
+
 ### Board Settings
 
 Use the following board configuration:
@@ -219,6 +222,10 @@ If the environment is bright, Robot 1 receives an additional speed multiplier.
 If the environment is dark, Robot 2 receives the speed multiplier.  
 This creates a dynamic battle mechanic based on real-world lighting.
 
+The ADXL345 accelerometer is read on a separate I2C bus using GPIO26 as SDA and GPIO27 as SCL.  
+It is used as an experimental environment sensor to measure X, Y, and Z acceleration and track maximum arena shake values.  
+These values are printed to the Serial Monitor and shown on the OLED environment data screen, but they do not decide HP damage in the final battle logic.
+
 When a robot's HP drops below 75, it enters rage mode.  
 In rage mode, a random speed multiplier is assigned to that robot, making the battle less predictable.
 
@@ -270,6 +277,8 @@ This keeps the device synchronized with the dashboard and allows real-time contr
 ![Screenshot 10](images/10.jpg)
 
 ![Screenshot 11](images/11.PNG)
+
+![Screenshot 12](images/12.jpg)
 
 ### Demo Video
 
