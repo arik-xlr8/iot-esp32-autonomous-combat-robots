@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>CHADGPT vs GROKOZILLA</title>
+
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/images/favicon-64.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png" />
+  <link rel="apple-touch-icon" href="assets/images/relicon.png" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <main class="app">
+    <section id="loaderScreen" class="loader-screen">
+      <div class="loader-card">
+        <div class="loader-spinner"></div>
+        <h1>Just a second</h1>
+      </div>
+    </section>
+
+    <section id="loginScreen" class="login-screen hidden">
+      <div class="login-card">
+        <div class="eyebrow">IoT Robot Battle Arena</div>
+        <h1>Welcome Fighter</h1>
+        <p>Enter your name to join the prediction arena.</p>
+        <br>
+        <span>(Try unique names to avoid collision)</span>
+
+        <input id="usernameInput" type="text" placeholder="Your name..." />
+        <button id="loginBtn">Enter Arena</button>
+        <div id="loginError" class="error"></div>
+      </div>
+    </section>
+
+    <section id="battleScreen" class="battle-screen hidden">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">Live Prediction Match</div>
+          <h1>CHADGPT vs GROKOZILLA</h1>
+        </div>
+
+        <div class="top-actions">
+          <div class="quick-actions">
+            <button id="rewardsBtn" class="rewards-box rewards-btn" type="button"><i class="fa-solid fa-gift" aria-hidden="true"></i><span>Rewards</span></button>
+            <button id="infoBtn" class="info-box info-btn" type="button" aria-label="Open robot info"><i class="fa-solid fa-circle-info" aria-hidden="true"></i><span>Info</span></button>
+          </div>
+
+          <div class="user-box">
+            <div class="profile-row">
+              <i class="fa-solid fa-user" aria-hidden="true"></i>
+              <span style="padding-right: 10px;" class="profile-name" id="userName">Player</span>
+              <button id="logoutBtn" class="logout-btn"><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i><span>Logout</span></button>
+            </div>
+            <div style="padding-top: 10px;" class="coin-chip">
+              <i class="coin-mini fa-solid fa-coins" aria-hidden="true"></i>
+              <span id="coinBalance">100</span>
+              <span class="coin-label">coin</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section id="waitingView" class="waiting-view">
+        <div class="waiting-card">
+          <div class="eyebrow">CHADGPT vs GROKOZILLA</div>
+          <h2>FIGHT NIGHT</h2>
+          <p id="waitingText">Waiting for the next match...</p>
+          <button id="enterMatchBtn" class="enter-match-btn hidden" type="button">Bahisler acildi</button>
+        </div>
+      </section>
+
+      <section id="statusPanel" class="status-panel hidden">
+        <div>
+          <span class="label">Match Status</span>
+          <strong id="matchStatus">Loading...</strong>
+        </div>
+
+        <div style="width: 100%;">
+          <span class="label">Winner</span>
+          <strong id="winnerText">NONE</strong>
+        </div>
+      </section>
+
+      <section id="arenaView" class="arena hidden">
+        <div class="fighter fighter-left fighter-chad" data-robot="ChadGPT">
+          <div class="vote-badge">VOTE LIVE</div>
+
+          <div style="opacity: 0;" class="fighter-image chadgpt">
+            <div class="robot-head">C</div>
+          </div>
+
+          <h2>CHADGPT</h2>
+
+          <div class="odds">
+            <span>Multiplier</span>
+            <strong id="chadMultiplier">0x</strong>
+          </div>
+
+          <div class="stats">
+            <div><span id="chadUsers">0</span> betters</div>
+            <div>Pool: <span id="chadPool">0</span> coins</div>
+          </div>
+
+          <button class="bet-btn bet-btn-chad" data-robot="ChadGPT">Bet on CHADGPT</button>
+        </div>
+
+        <div class="center-vs">
+          <div class="who">Who will win?</div>
+          <div class="vs">VS</div>
+
+          <div class="pool-card">
+            <span class="pool-title">WHO WILL WIN?</span>
+            <span class="pool-subtitle">Pool Total - <span id="totalPool">0</span> coins</span>
+            <div class="pool-visual">
+              <div class="pool-outside-percent pool-outside-chad">
+                <span id="chadPercent">0%</span>
+              </div>
+              <div id="poolBowl" class="pool-bowl">
+                <div class="liquid-side liquid-chad">
+                  <div class="liquid-fill"></div>
+                </div>
+                <div class="liquid-side liquid-groko">
+                  <div class="liquid-fill"></div>
+                </div>
+              </div>
+              <div class="pool-outside-percent pool-outside-groko">
+                <span id="grokoPercent">0%</span>
+              </div>
+              <div class="pool-legend">
+                <div class="pool-side pool-side-chad">
+                  <i></i>
+                  <span id="chadPoolShare">0%</span>
+                  <small>CHADGPT</small>
+                </div>
+                <div class="pool-side pool-side-groko">
+                  <i></i>
+                  <span id="grokoPoolShare">0%</span>
+                  <small>GROKOZILLA</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bet-box">
+            <label>Bet Amount</label>
+            <input id="betAmount" type="number" min="1" value="10" />
+          </div>
+
+          <div id="userBetBox" class="user-bet hidden"></div>
+          <div id="messageBox" class="message"></div>
+          <div class="coin-chip center-coin-chip">
+            <i class="coin-mini fa-solid fa-coins" aria-hidden="true"></i>
+            <span id="centerCoinBalance">100</span>
+            <span class="coin-label">coin</span>
+          </div>
+        </div>
+
+        <div class="fighter fighter-right fighter-groko" data-robot="GROKOZILLA">
+          <div class="vote-badge">VOTE LIVE</div>
+
+          <div style="opacity: 0;" class="fighter-image grokozilla">
+            <div class="monster-head">G</div>
+          </div>
+
+          <h2>GROKOZILLA</h2>
+
+          <div class="odds">
+            <span>Multiplier</span>
+            <strong id="grokoMultiplier">0x</strong>
+          </div>
+
+          <div class="stats">
+            <div><span id="grokoUsers">0</span> betters</div>
+            <div>Pool: <span id="grokoPool">0</span> coins</div>
+          </div>
+
+          <button class="bet-btn bet-btn-groko" data-robot="GROKOZILLA">Bet on GROKOZILLA</button>
+        </div>
+      </section>
+
+      <section id="resultPanel" class="result-panel hidden">
+        <h2 id="resultTitle">Winner</h2>
+        <p id="resultDescription"></p>
+
+        <div class="winner-card">
+          <div id="winnerAvatar" class="winner-avatar"></div>
+          <h3 id="winnerName"></h3>
+        </div>
+      </section>
+
+      <section id="betsPanel" class="bets-panel hidden">
+        <h2>Live Bets</h2>
+        <div id="betsList" class="bets-list"></div>
+      </section>
+
+      <div id="rewardsModal" class="modal hidden">
+        <div class="modal-backdrop" id="rewardsBackdrop"></div>
+        <section class="rewards-modal">
+          <div class="modal-head">
+            <h2>Rewards</h2>
+            <button id="closeRewardsBtn" type="button" aria-label="Close rewards"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+          </div>
+
+          <div class="reward-grid">
+            <article class="reward-card reward-water">
+              <div class="reward-image" aria-hidden="true"></div>
+              <strong>Su</strong>
+              <span><i class="fa-solid fa-coins" aria-hidden="true"></i> <b id="waterPrice">300</b> coin</span>
+              <small id="waterStock">3 left</small>
+              <button class="reward-buy-btn" data-item="water" type="button">Buy</button>
+            </article>
+
+            <article class="reward-card reward-cokonat">
+              <div class="reward-image" aria-hidden="true"></div>
+              <strong>Cokonat</strong>
+              <span><i class="fa-solid fa-coins" aria-hidden="true"></i> <b id="cokonatPrice">600</b> coin</span>
+              <small id="cokonatStock">3 left</small>
+              <button class="reward-buy-btn" data-item="cokonat" type="button">Buy</button>
+            </article>
+
+            <article class="reward-card reward-toblerone">
+              <div class="reward-image" aria-hidden="true"></div>
+              <strong>Toblerone</strong>
+              <span><i class="fa-solid fa-coins" aria-hidden="true"></i> <b id="tobleronePrice">2000</b> coin</span>
+              <small id="tobleroneStock">1 left</small>
+              <button class="reward-buy-btn" data-item="toblerone" type="button">Buy</button>
+            </article>
+          </div>
+
+          <div id="rewardsMessage" class="rewards-message"></div>
+        </section>
+      </div>
+
+      <div id="infoModal" class="modal hidden">
+        <div class="modal-backdrop" id="infoBackdrop"></div>
+        <section class="info-modal">
+          <div class="modal-head">
+            <h2>Battle Setup</h2>
+            <button id="closeInfoBtn" type="button" aria-label="Close info"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+          </div>
+
+          <div class="presentation-layout">
+            <figure class="fighter-presenter fighter-presenter-chad">
+              <img src="assets/images/chadgpt_model.png" alt="ChadGPT" />
+              <figcaption>CHADGPT</figcaption>
+            </figure>
+
+            <div class="component-stack" aria-label="Robot sensors and actuators">
+              <article class="component-card">
+                <div class="component-photo">
+                  <img src="assets/images/servo.png" alt="Servo motor" />
+                </div>
+                <strong>Servo</strong>
+                <span>Actuator</span>
+              </article>
+              <article class="component-card">
+                <div class="component-photo">
+                  <img src="assets/images/ldr.png" alt="LDR sensor" />
+                </div>
+                <strong>LDR</strong>
+                <span>Sensor</span>
+              </article>
+              <article class="component-card">
+                <div class="component-photo">
+                  <img src="assets/images/piezo.png" alt="Piezo sensor" />
+                </div>
+                <strong>Piezo</strong>
+                <span>Sensor</span>
+              </article>
+              <article class="component-card">
+                <div class="component-photo">
+                  <img src="assets/images/adxl345.png" alt="ADXL345 sensor module" />
+                </div>
+                <strong>ADXL345</strong>
+                <span>Sensor</span>
+              </article>
+              <article class="component-card">
+                <div class="component-photo">
+                  <img src="assets/images/esp32.png" alt="ESP32 development board" />
+                </div>
+                <strong>ESP32</strong>
+                <span>Controller</span>
+              </article>
+            </div>
+
+            <figure class="fighter-presenter fighter-presenter-groko">
+              <img src="assets/images/grokozilla_model.png" alt="GROKOZILLA" />
+              <figcaption>GROKOZILLA</figcaption>
+            </figure>
+          </div>
+
+          <div class="battle-explanation">
+            <p>
+              ChadGPT vs GROKOZILLA is an IoT-powered robot battle where two cardboard fighters step into the ring under the control of an ESP32. When the match starts, servo-driven arms perform attack motions in sequence, and every physical contact is judged through real sensor feedback. The winner is not chosen randomly; the arena turns actual hits into health-point changes.
+            </p>
+            <p>
+              Piezo sensors detect incoming hits and reduce the HP of the robot that takes damage. The LDR reads ambient light and adds a tactical twist to the fight by giving a speed advantage depending on the lighting conditions. The OLED display shows live HP values, rage mode status, light-based effects, and the winner. The ADXL345 accelerometer is included experimentally to explore motion and acceleration data during the battle.
+            </p>
+            <p>
+              On the control side, Arduino IoT Cloud is used to start and stop the battle remotely while monitoring robot data through a dashboard. The ESP32 handles sensor reading, Wi-Fi communication, and servo control signals, while the two SG90 servos are powered from separate 5V sources for stable movement. All grounds are connected together so the servo signals are interpreted correctly, keeping the physical arena and the digital dashboard locked into the same fight.
+            </p>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

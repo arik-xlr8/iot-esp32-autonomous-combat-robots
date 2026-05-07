@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robot Battle Admin</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="admin-app">
+    <section id="loginView" class="login-view">
+      <form id="loginForm" class="login-panel">
+        <div class="eyebrow">Robot Battle Admin</div>
+        <h1>Control Panel</h1>
+
+        <label>
+          Username
+          <input id="adminUsername" type="text" autocomplete="username" value="admin" />
+        </label>
+
+        <label>
+          Password
+          <input id="adminPassword" type="password" autocomplete="current-password" />
+        </label>
+
+        <button type="submit">Login</button>
+        <div id="loginMessage" class="message error"></div>
+      </form>
+    </section>
+
+    <section id="panelView" class="panel-view hidden">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">Robot Battle Admin</div>
+          <h1>Match Operations</h1>
+        </div>
+
+        <button id="logoutBtn" class="ghost-btn">Logout</button>
+      </header>
+
+      <section class="layout">
+        <div class="main-column">
+          <section class="panel">
+            <div class="panel-head">
+              <h2>Current Match</h2>
+              <button id="reloadBtn" class="ghost-btn" type="button">Refresh</button>
+            </div>
+
+            <div id="matchSummary" class="match-summary"></div>
+
+            <div class="stats-grid">
+              <div>
+                <span>Status</span>
+                <strong id="matchStatus">-</strong>
+              </div>
+              <div>
+                <span>Total Pool</span>
+                <strong><span id="totalPool">0</span> coins</strong>
+              </div>
+              <div>
+                <span>Winner</span>
+                <strong id="winnerText">NONE</strong>
+              </div>
+            </div>
+
+            <div class="robot-grid">
+              <div class="robot-stat">
+                <span>GROKOZILLA</span>
+                <strong><span id="grokoPool">0</span> coins</strong>
+                <small><span id="grokoUsers">0</span> voters</small>
+              </div>
+              <div class="robot-stat">
+                <span>ChadGPT</span>
+                <strong><span id="chadPool">0</span> coins</strong>
+                <small><span id="chadUsers">0</span> voters</small>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel">
+            <h2>Live Bets</h2>
+            <div id="betsList" class="bets-list"></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <h2>Reward Requests</h2>
+              <button id="reloadRewardsBtn" class="ghost-btn" type="button">Refresh</button>
+            </div>
+            <div id="rewardOrdersList" class="bets-list"></div>
+          </section>
+        </div>
+
+        <aside class="side-column">
+          <section class="panel">
+            <h2>Create Match</h2>
+            <label>
+              Title
+              <input id="matchTitle" type="text" value="ChadGPT vs GROKOZILLA" />
+            </label>
+            <button id="createBtn" type="button">Create</button>
+          </section>
+
+          <section class="panel">
+            <h2>Match Flow</h2>
+            <button id="openBtn" type="button">Open Betting</button>
+            <button id="lockBtn" type="button">Lock Betting</button>
+          </section>
+
+          <section class="panel">
+            <h2>Close Match</h2>
+            <label>
+              Winner
+              <select id="winnerSelect">
+                <option value="GROKOZILLA">GROKOZILLA</option>
+                <option value="ChadGPT">ChadGPT</option>
+              </select>
+            </label>
+            <button id="payoutBtn" type="button">Pay Winner</button>
+            <button id="cancelBtn" class="danger-btn" type="button">Cancel and Refund</button>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <h2>Reward Items</h2>
+              <button id="reloadRewardItemsBtn" class="ghost-btn" type="button">Refresh</button>
+            </div>
+
+            <p class="panel-note">Edit prices and current available stock. User purchases decrease this stock immediately.</p>
+            <div id="rewardItemsForm" class="reward-items-form"></div>
+            <button id="saveRewardItemsBtn" type="button">Save Rewards</button>
+          </section>
+
+          <div id="panelMessage" class="message"></div>
+        </aside>
+      </section>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Place Bet Test</h2>
+
+  <button onclick="placeBet('ChadGPT')">Bet 10 Coin on ChadGPT</button>
+  <button onclick="placeBet('GROKOZILLA')">Bet 10 Coin on GROKOZILLA</button>
+
+  <h3>Live Stats</h3>
+  <button onclick="getStats()">Refresh Stats</button>
+
+  <pre id="result"></pre>
+
+  <script>
+    async function placeBet(robot) {
+      const res = await fetch('api/place-bet.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          selectedRobot: robot,
+          amount: 10
+        })
+      });
+
+      const text = await res.text();
+      document.getElementById('result').textContent = text;
+    }
+
+    async function getStats() {
+      const res = await fetch('api/get-live-stats.php');
+      const text = await res.text();
+      document.getElementById('result').textContent = text;
+    }
+  </script>
+</body>
+</html>

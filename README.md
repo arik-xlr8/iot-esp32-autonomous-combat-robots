@@ -286,6 +286,28 @@ This keeps the device synchronized with the dashboard and allows real-time contr
 
 ---
 
+## 8.5 Web Application
+
+This project includes a web application developed to provide an interactive platform for the robot battles. The web app allows users to watch live battles, place bets on robots, and manage the system through an admin panel.
+
+### Features
+
+- **User Interface**: Users can log in, view live match statistics, place bets on their favorite robots, and track rewards.
+- **Live Updates**: Real-time data from the ESP32 robots is displayed, including health points, rage mode, and battle status.
+- **Admin Panel**: Administrators can start/stop matches, manage rewards, view system status, and handle user bets.
+- **API Backend**: The application uses PHP-based APIs for authentication, betting, live stats, and admin functions.
+
+### Structure
+
+- `index.html`: Main user interface for watching battles and placing bets.
+- `admin/index.html`: Admin dashboard for managing the system.
+- `api/`: PHP scripts for backend functionality (login, logout, place-bet, live-stats, etc.).
+- `assets/`: CSS and JavaScript files for styling and interactivity.
+
+The web app enhances the IoT robot battle experience by providing a digital interface for remote monitoring and engagement.
+
+---
+
 ## 9. Notes and Limitations
 
 - The servo motors require stable external 5V power. Powering both servos from a single weak 5V source caused unstable movement, slower response, and jitter.
